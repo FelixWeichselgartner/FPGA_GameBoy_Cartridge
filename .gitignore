@@ -1,0 +1,3 @@
+xilinx/
+LUT_Generator/*.gb
+LUT_Generator/*.vhd

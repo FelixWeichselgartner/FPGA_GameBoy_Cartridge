@@ -13,6 +13,11 @@ ENTITY cartridge IS
 END cartridge;
 
 ARCHITECTURE arch OF cartridge IS
+    TYPE rom IS ARRAY (0 TO 32767) OF STD_LOGIC_VECTOR(7 DOWNTO 0);
+    CONSTANT gbrom : rom := (
+        -- insert your lut here
+    );
+
     SIGNAL address : STD_LOGIC_VECTOR(15 DOWNTO 0);
     SIGNAL data : STD_LOGIC_VECTOR(7 DOWNTO 0);
 BEGIN
@@ -23,7 +28,7 @@ BEGIN
     PROCESS (wr, rd)
     BEGIN
         IF falling_edge(rd) THEN
-            data <= some_array(address);
+            data <= gbrom(to_integer(unsigned(address)));
         END IF;
     END PROCESS;
 
