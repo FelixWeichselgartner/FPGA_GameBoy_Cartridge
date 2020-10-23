@@ -2,7 +2,7 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL; -- to use std_logic / std_logic_vector
 USE ieee.numeric_std.ALL; -- to use arithmetic functions
-USE ieee.std_logic_unsigned.ALL; -- add std_logic_vectors
+--USE ieee.std_logic_unsigned.ALL; -- add std_logic_vectors
 
 ENTITY cartridge IS
     -- all ports of type std_logic / std_logic_vector
@@ -15,16 +15,16 @@ END cartridge;
 ARCHITECTURE arch OF cartridge IS
     TYPE rom IS ARRAY (0 TO 32767) OF STD_LOGIC_VECTOR(7 DOWNTO 0);
     CONSTANT gbrom : rom := (
-        -- insert your lut here
+        -- insert rom here
     );
 
-    SIGNAL address : STD_LOGIC_VECTOR(15 DOWNTO 0);
-    SIGNAL data : STD_LOGIC_VECTOR(7 DOWNTO 0);
+    SIGNAL address : STD_LOGIC_VECTOR(15 DOWNTO 0) := (others => '0');
+    SIGNAL data : STD_LOGIC_VECTOR(7 DOWNTO 0) := (others => '0');
 BEGIN
 
     address <= a15 & a14 & a13 & a12 & a11 & a10 & a9 & a8 & a7 & a6 & a5 & a4 & a3 & a2 & a1 & a0;
 
-    -- combinational logic
+    -- combinatorical logic
     PROCESS (wr, rd)
     BEGIN
         IF falling_edge(rd) THEN
